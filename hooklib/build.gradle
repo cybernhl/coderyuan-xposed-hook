@@ -1,14 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdk 35
+    buildFeatures{
+        buildConfig =true
+    }
 
+    namespace "com.coderyuan.hook"
     defaultConfig {
-        minSdkVersion 23
-        targetSdkVersion 29
+        minSdk 15
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -16,9 +19,13 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                includeCompileClasspath = true
+//                includeCompileClasspath = true
             }
         }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     buildTypes {
@@ -33,8 +40,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
